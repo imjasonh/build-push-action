@@ -48,6 +48,7 @@ jobs:
         uses: ./action
         with:
           file: ./test/Dockerfile
+          sign: true
 
   git-context:
     runs-on: ubuntu-latest
