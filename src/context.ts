@@ -74,7 +74,7 @@ export async function getInputs(): Promise<Inputs> {
     target: core.getInput('target'),
     ulimit: Util.getInputList('ulimit', { ignoreComma: true }),
     githubToken: core.getInput('github-token'),
-    sign: core.getInput('sign'),
+    sign: core.getBooleanInput('sign'),
   };
 }
 
