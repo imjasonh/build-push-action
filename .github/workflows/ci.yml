@@ -43,8 +43,13 @@ jobs:
           version: ${{ inputs.buildx-version || env.BUILDX_VERSION }}
           driver-opts: |
             image=${{ inputs.buildkit-image || env.BUILDKIT_IMAGE }}
+
       -
-        name: Build
+        name: Set up Cosign
+        uses: sigstore/cosign-installer@v3.2.0
+
+      -
+        name: Build and Sign
         uses: ./action
         with:
           file: ./test/Dockerfile
