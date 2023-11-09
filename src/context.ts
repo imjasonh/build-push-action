@@ -1,10 +1,10 @@
 import * as core from '@actions/core';
 import * as handlebars from 'handlebars';
-import {Context} from '@docker/actions-toolkit/lib/context';
-import {GitHub} from '@docker/actions-toolkit/lib/github';
-import {Inputs as BuildxInputs} from '@docker/actions-toolkit/lib/buildx/inputs';
-import {Toolkit} from '@docker/actions-toolkit/lib/toolkit';
-import {Util} from '@docker/actions-toolkit/lib/util';
+import { Context } from '@docker/actions-toolkit/lib/context';
+import { GitHub } from '@docker/actions-toolkit/lib/github';
+import { Inputs as BuildxInputs } from '@docker/actions-toolkit/lib/buildx/inputs';
+import { Toolkit } from '@docker/actions-toolkit/lib/toolkit';
+import { Util } from '@docker/actions-toolkit/lib/util';
 
 export interface Inputs {
   addHosts: string[];
@@ -38,41 +38,43 @@ export interface Inputs {
   target: string;
   ulimit: string[];
   githubToken: string;
+  sign: boolean;
 }
 
 export async function getInputs(): Promise<Inputs> {
   return {
     addHosts: Util.getInputList('add-hosts'),
     allow: Util.getInputList('allow'),
-    attests: Util.getInputList('attests', {ignoreComma: true}),
-    buildArgs: Util.getInputList('build-args', {ignoreComma: true}),
-    buildContexts: Util.getInputList('build-contexts', {ignoreComma: true}),
+    attests: Util.getInputList('attests', { ignoreComma: true }),
+    buildArgs: Util.getInputList('build-args', { ignoreComma: true }),
+    buildContexts: Util.getInputList('build-contexts', { ignoreComma: true }),
     builder: core.getInput('builder'),
-    cacheFrom: Util.getInputList('cache-from', {ignoreComma: true}),
-    cacheTo: Util.getInputList('cache-to', {ignoreComma: true}),
+    cacheFrom: Util.getInputList('cache-from', { ignoreComma: true }),
+    cacheTo: Util.getInputList('cache-to', { ignoreComma: true }),
     cgroupParent: core.getInput('cgroup-parent'),
     context: core.getInput('context') || Context.gitContext(),
     file: core.getInput('file'),
-    labels: Util.getInputList('labels', {ignoreComma: true}),
+    labels: Util.getInputList('labels', { ignoreComma: true }),
     load: core.getBooleanInput('load'),
     network: core.getInput('network'),
     noCache: core.getBooleanInput('no-cache'),
     noCacheFilters: Util.getInputList('no-cache-filters'),
-    outputs: Util.getInputList('outputs', {ignoreComma: true}),
+    outputs: Util.getInputList('outputs', { ignoreComma: true }),
     platforms: Util.getInputList('platforms'),
     provenance: BuildxInputs.getProvenanceInput('provenance'),
     pull: core.getBooleanInput('pull'),
     push: core.getBooleanInput('push'),
     sbom: core.getInput('sbom'),
-    secrets: Util.getInputList('secrets', {ignoreComma: true}),
+    secrets: Util.getInputList('secrets', { ignoreComma: true }),
     secretEnvs: Util.getInputList('secret-envs'),
-    secretFiles: Util.getInputList('secret-files', {ignoreComma: true}),
+    secretFiles: Util.getInputList('secret-files', { ignoreComma: true }),
     shmSize: core.getInput('shm-size'),
     ssh: Util.getInputList('ssh'),
     tags: Util.getInputList('tags'),
     target: core.getInput('target'),
-    ulimit: Util.getInputList('ulimit', {ignoreComma: true}),
-    githubToken: core.getInput('github-token')
+    ulimit: Util.getInputList('ulimit', { ignoreComma: true }),
+    githubToken: core.getInput('github-token'),
+    sign: core.getInput('sign'),
   };
 }
 
